@@ -9,41 +9,53 @@ function printProps(obj) {
 
 function init() {
   tempo = document.getElementById('tempo').value;
-  P = new Player(tempo, 4);
+  P = new MeasurePlayer(tempo, 4, true);
 }
 
-function Player(tempo, beats) {
+function ToneGenerator() {
   this.audioContext = new (window.AudioContext || window.webkitAudioContext);
   this.currentOsc = null;
-  this.masterGainNode = null;
-  this.timer = null;
-  this.beepDuration = 50; // milliseconds
-  this.timePerBeat = (60000)/tempo;
+  this.toneTimer = null;
+  this.toneDuration = 50; // milliseconds
 
   this.masterGainNode = this.audioContext.createGain();
   this.masterGainNode.connect(this.audioContext.destination);
   this.masterGainNode.gain.value = 0.5;
 
-  this.play = function() {
-    playBeat = function(which, self) {
-      let beatTimer = null;
-      self.currentOsc = self.audioContext.createOscillator();
-      self.currentOsc.connect(self.masterGainNode);
-      self.currentOsc.frequency.value = FREQS[which];
-      self.currentOsc.type = "sine";
-      self.currentOsc.start();
-      stopBeat = function(osc) {
-        osc.stop();
-        clearTimeout(beatTimer);
-      }
-      beat = setTimeout(stopBeat, self.beepDuration, self.currentOsc); // TODO perhaps a better way than this...
-    }
-    this.timer = setInterval(playBeat, this.timePerBeat, 1, this);
+  this.playTone = function(self) {
+    self.currentOsc = self.audioContext.createOscillator();
+    self.currentOsc.connect(self.masterGainNode);
+    self.currentOsc.frequency.value = FREQS[1];
+    self.currentOsc.type = "sine";
+    self.currentOsc.start();
+    self.toneTimer = setTimeout(self.stopTone, self.toneDuration, self); // TODO perhaps a better way than this...
   }
 
-  this.stop = function() {
-    clearInterval(this.timer);
-    this.timer = null;
+  this.stopTone = function(self) {
+    self.currentOsc.stop();
+    clearTimeout(self.toneTimer);
+    self.toneTimer = null;
+    self.currentOsc = null;
+  }
+}
+
+function MeasurePlayer(tempo, beats, downbeatAccents) {
+  this.timer = null;
+  this.endTimer = null;
+  this.toneGenerator = new ToneGenerator();
+  this.timePerBeat = (60000)/tempo;
+  this.totalTime = this.timePerBeat * beats;
+
+
+  this.play = function() {
+    this.timer = setInterval(this.toneGenerator.playTone, this.timePerBeat, this.toneGenerator);
+    this.endTimer = setTimeout(this.stop, this.totalTime, this);
+  }
+
+  this.stop = function(self) {
+    clearInterval(self.timer);
+    clearInterval(self.endTimer);
+    self.timer = null;
   }
 }
 
