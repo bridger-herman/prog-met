@@ -16,25 +16,34 @@ function Player(tempo, beats) {
   this.audioContext = new (window.AudioContext || window.webkitAudioContext);
   this.currentOsc = null;
   this.masterGainNode = null;
+  this.timer = null;
   this.beepDuration = 50; // milliseconds
-  this.baseTime = null;
+  this.timePerBeat = (60000)/tempo;
 
   this.masterGainNode = this.audioContext.createGain();
   this.masterGainNode.connect(this.audioContext.destination);
   this.masterGainNode.gain.value = 0.5;
 
-  this.play = function(which) {
-    this.currentOsc = this.audioContext.createOscillator();
-    this.currentOsc.connect(this.masterGainNode);
-    this.currentOsc.frequency.value = FREQS[which];
-    this.currentOsc.type = "sine";
-    this.currentOsc.start();
-    setTimeout(this.stop, this.beepDuration, this.currentOsc); // TODO perhaps a better way than this...
+  this.play = function() {
+    playBeat = function(which, self) {
+      let beatTimer = null;
+      self.currentOsc = self.audioContext.createOscillator();
+      self.currentOsc.connect(self.masterGainNode);
+      self.currentOsc.frequency.value = FREQS[which];
+      self.currentOsc.type = "sine";
+      self.currentOsc.start();
+      stopBeat = function(osc) {
+        osc.stop();
+        clearTimeout(beatTimer);
+      }
+      beat = setTimeout(stopBeat, self.beepDuration, self.currentOsc); // TODO perhaps a better way than this...
+    }
+    this.timer = setInterval(playBeat, this.timePerBeat, 1, this);
   }
 
-  this.stop = function(osc) {
-    osc.stop();
-    clearTimeout();
+  this.stop = function() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 }
 
