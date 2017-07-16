@@ -8,20 +8,26 @@
   </head>
   <body>
     <h1>Programmable Metronome</h1>
-    <button class="material-icons" type="button" name="play" onclick="P.play(P)">play_arrow</button>
-    <button class="material-icons" type="button" name="stop" onclick="P.stop(P)">stop</button>
+    <div class="basic">
+      <h2>Basic Mode</h2>
+      <button class="material-icons" type="button" name="play" onclick="P.play(P)">play_arrow</button>
+      <button class="material-icons" type="button" name="stop" onclick="P.stop(P)">stop</button>
 
-    <label for="tempo">Tempo</label>
-    <input class="update-object" type="number" name="tempo" value="120">
+      <label for="tempo">Tempo</label>
+      <input class="update-object" type="number" name="tempo" value="120">
 
-    <label for="beats">Beats per measure</label>
-    <input class="update-object" type="number" name="beats" value="4">
+      <label for="beats">Beats per measure</label>
+      <input class="update-object" type="number" name="beats" value="4">
 
-    <label for="subdiv">Clicks per beat</label>
-    <input class="update-object" type="number" name="subdiv" value="1">
+      <label for="subdiv">Clicks per beat</label>
+      <input class="update-object" type="number" name="subdiv" value="1">
 
-    <label for="db-accent">Accent downbeats</label>
-    <input class="update-object" type="checkbox" name="db-accent" checked>
+      <label for="db-accent">Accent downbeats</label>
+      <input class="update-object" type="checkbox" name="db-accent" checked>
+    </div>
+    <div class="advanced">
+      <h2>Advanced Mode</h2>
+    </div>
 
     <script type="text/javascript" src="./assets/js/player.js"></script>
   </body>
