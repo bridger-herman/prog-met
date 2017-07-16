@@ -1,4 +1,4 @@
-let FREQS = [880.000000000000000, 1174.659071669630241, 1760.000000000000000];
+let FREQS = {"a5":880.000000000000000, "d6":1174.659071669630241, "a6":1760.000000000000000};
 let DURATION = 30; // milliseconds
 let P = null;
 
@@ -55,9 +55,9 @@ function MeasurePlayer(tempo, beats, subdivs, downbeatAccents) {
   this.timePerMeasure = this.timePerBeat*beats;
   this.timePerSubdiv = this.timePerMeasure/this.numSubdivs;
 
-  this.dbTones = new ToneGenerator(2);
-  this.beatTones = new ToneGenerator(1);
-  this.subdivTones = new ToneGenerator(0);
+  this.dbTones = new ToneGenerator("a6");
+  this.beatTones = new ToneGenerator("d6");
+  this.subdivTones = new ToneGenerator("a5");
 
   this.timers = [];
   for (var timerIndex = 0; timerIndex < this.numSubdivs; timerIndex++) {
