@@ -10,13 +10,19 @@
     <h1>Programmable Metronome</h1>
     <button class="material-icons" type="button" name="play" onclick="P.play(P)">play_arrow</button>
     <button class="material-icons" type="button" name="stop" onclick="P.stop(P)">stop</button>
-    <!-- <button type="button" name="test" onclick="T.playTone(T)">stop</button> -->
-    <input type="number" name="tempo" value="120" id="tempo">
-    <input type="number" name="beats" value="24" id="beats">
-    <input type="number" name="subdiv" value="4" id="subdiv">
-    <input type="checkbox" name="db-accent" id="db-accent" checked>
-    <!-- <input type="checkbox" name="db-accent" id="db-accent"> -->
-    <script type="text/javascript" src="./assets/js/player.js">
-    </script>
+
+    <label for="tempo">Tempo</label>
+    <input class="update-object" type="number" name="tempo" value="120">
+
+    <label for="beats">Beats per measure</label>
+    <input class="update-object" type="number" name="beats" value="4">
+
+    <label for="subdiv">Clicks per beat</label>
+    <input class="update-object" type="number" name="subdiv" value="1">
+
+    <label for="db-accent">Accent downbeats</label>
+    <input class="update-object" type="checkbox" name="db-accent" checked>
+
+    <script type="text/javascript" src="./assets/js/player.js"></script>
   </body>
 </html>

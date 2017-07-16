@@ -8,11 +8,24 @@ function printProps(obj) {
   }
 }
 
+function updateMeasure(event) {
+  var tempo = document.getElementsByName('tempo')[0].value;
+  var beats = document.getElementsByName('beats')[0].value;
+  var subdiv = document.getElementsByName('subdiv')[0].value;
+  var accents = document.getElementsByName('db-accent')[0].checked;
+  P.init(tempo, beats, subdiv, accents);
+}
+
 function init() {
-  var tempo = document.getElementById('tempo').value;
-  var beats = document.getElementById('beats').value;
-  var subdiv = document.getElementById('subdiv').value;
-  var accents = document.getElementById('db-accent').checked;
+  var objsToUpdate = document.getElementsByClassName('update-object');
+  for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
+    objsToUpdate[objIndex].onchange = updateMeasure;
+  }
+
+  var tempo = document.getElementsByName('tempo')[0].value;
+  var beats = document.getElementsByName('beats')[0].value;
+  var subdiv = document.getElementsByName('subdiv')[0].value;
+  var accents = document.getElementsByName('db-accent')[0].checked;
   P = new MeasurePlayer(tempo, beats, subdiv, accents);
   // T = new ToneGenerator(1);
 }
@@ -46,14 +59,19 @@ function ToneGenerator(toneIndex) {
   }
 }
 
-function MeasurePlayer(tempo, beats, subdivs, downbeatAccents) {
-  this.beats = beats;
-  this.subdivs = subdivs;
-  this.numSubdivs = beats*subdivs;
+function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
+  this.init = function(tempo, beats, subdivs, dbAccents) {
+    this.beats = beats;
+    this.subdivs = subdivs;
+    this.dbAccents = dbAccents;
+    this.numSubdivs = beats*subdivs;
 
-  this.timePerBeat = 60000/tempo;
-  this.timePerMeasure = this.timePerBeat*beats;
-  this.timePerSubdiv = this.timePerMeasure/this.numSubdivs;
+    this.timePerBeat = 60000/tempo;
+    this.timePerMeasure = this.timePerBeat*beats;
+    this.timePerSubdiv = this.timePerMeasure/this.numSubdivs;
+  }
+
+  this.init(tempo, beats, subdivs, dbAccents);
 
   this.dbTones = new ToneGenerator("a6");
   this.beatTones = new ToneGenerator("d6");
@@ -68,7 +86,7 @@ function MeasurePlayer(tempo, beats, subdivs, downbeatAccents) {
   this.play = function(self) {
     for (var timerIndex = 0; timerIndex < self.numSubdivs; timerIndex++) {
       if (timerIndex % self.subdivs === 0) {
-        if (timerIndex === 0) {
+        if (timerIndex === 0 && this.numSubdivs === true) {
           // console.log("db");
           this.timers[timerIndex] = setTimeout(self.dbTones.playTone, timerIndex*self.timePerSubdiv, self.dbTones);
         }
@@ -90,6 +108,7 @@ function MeasurePlayer(tempo, beats, subdivs, downbeatAccents) {
       this.timers[timerIndex] = null;
     }
   }
+
 }
 
 document.onload = init();
