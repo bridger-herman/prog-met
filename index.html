@@ -10,20 +10,19 @@
     <h1>Programmable Metronome</h1>
     <div class="basic">
       <h2>Basic Mode</h2>
-      <button class="material-icons" type="button" name="play" onclick="P.play(P)">play_arrow</button>
-      <button class="material-icons" type="button" name="stop" onclick="P.stop(P)">stop</button>
+      <button class="material-icons" type="button" name="play-stop" onclick="BASIC_PLAYER.togglePlay()">play_arrow</button>
 
       <label for="tempo">Tempo</label>
-      <input class="update-object" type="number" name="tempo" value="120">
+      <input required minlength="1" class="update-object" type="number" name="tempo" value="120" min="1" max="300">
 
       <label for="beats">Beats per measure</label>
-      <input class="update-object" type="number" name="beats" value="4">
+      <input required minlength="1" class="update-object" type="number" name="beats" value="4" min="1" max="20">
 
       <label for="subdiv">Clicks per beat</label>
-      <input class="update-object" type="number" name="subdiv" value="1">
+      <input required minlength="1" class="update-object" type="number" name="subdiv" value="1" min="1" max="10">
 
       <label for="db-accent">Accent downbeats</label>
-      <input class="update-object" type="checkbox" name="db-accent" checked>
+      <input required minlength="1" class="update-object" type="checkbox" name="db-accent" checked>
     </div>
     <div class="advanced">
       <h2>Advanced Mode</h2>
