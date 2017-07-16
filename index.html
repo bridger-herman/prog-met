@@ -3,14 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Programmable Metronome</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
     <h1>Programmable Metronome</h1>
-    <button type="button" name="play" onclick="P.play()">Play</button>
-    <button type="button" name="stop" onclick="P.stop()">Stop</button>
+    <button class="material-icons" type="button" name="play" onclick="P.play(P)">play_arrow</button>
+    <button class="material-icons" type="button" name="stop" onclick="P.stop(P)">stop</button>
+    <!-- <button type="button" name="test" onclick="T.playTone(T)">stop</button> -->
     <input type="number" name="tempo" value="120" id="tempo">
-    <!-- <button type="button" name="button" onmousedown="playSound(0)" onmouseup="stopSound()">Play a5</button>
-    <button type="button" name="button" onmousedown="playSound(1)" onmouseup="stopSound()">Play d6</button> -->
+    <input type="number" name="beats" value="24" id="beats">
+    <input type="number" name="subdiv" value="4" id="subdiv">
+    <input type="checkbox" name="db-accent" id="db-accent" checked>
+    <!-- <input type="checkbox" name="db-accent" id="db-accent"> -->
     <script type="text/javascript" src="./assets/js/player.js">
     </script>
   </body>
