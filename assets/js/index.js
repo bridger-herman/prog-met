@@ -1,18 +1,19 @@
 // Depends on measurePlayer.js
 
 let BASIC_PLAYER = null;
+let ACTIVE_MEASURE = null;
 
 function init() {
   // Input callbacks
-  var objsToUpdate = document.getElementsByClassName('update-object');
+  var objsToUpdate = $('.update-object');
   for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
     objsToUpdate[objIndex].onchange = updateMeasure;
   }
 
   // Input validation
-  let numInputs = document.querySelectorAll('input[type=number]')
-  numInputs.forEach(function (input) {
-    input.addEventListener('change', function (e) {
+  let inputs = $('input[type=number]');
+  inputs.each(function (i) {
+    $(inputs[i]).on('change', function (e) {
       let val = e.target.value;
       let min = parseInt(e.target.min);
       let max = parseInt(e.target.max);
@@ -29,19 +30,17 @@ function init() {
   })
 
   // Get the initial values
-  var tempo = document.getElementsByName('tempo')[0].value;
-  var beats = document.getElementsByName('beats')[0].value;
-  var subdiv = document.getElementsByName('subdiv')[0].value;
-  var accents = document.getElementsByName('db-accent')[0].checked;
-  BASIC_PLAYER = new BasicPlayer(tempo, beats, subdiv, accents);
+  ACTIVE_MEASURE = new MeasurePlayer();
+  updateMeasure();
+  BASIC_PLAYER = new BasicPlayer(ACTIVE_MEASURE);
 }
 
 function updateMeasure(event) {
-  let tempo = document.getElementsByName('tempo')[0].value;
-  let beats = document.getElementsByName('beats')[0].value;
-  let subdiv = document.getElementsByName('subdiv')[0].value;
-  let accents = document.getElementsByName('db-accent')[0].checked;
-  BASIC_PLAYER.init(tempo, beats, subdiv, accents);
+  var tempo = $('#tempo').val();
+  var beats = $('#beats').val();
+  var subdiv = $('#subdiv').val();
+  var accents = $('#db-accent').prop('checked');
+  ACTIVE_MEASURE.init(tempo, beats, subdiv, accents);
 }
 
 function printProps(obj) {
@@ -50,14 +49,10 @@ function printProps(obj) {
   }
 }
 
-function BasicPlayer(tempo, beats, subdivs, dbAccents) {
-  this.measurePlayer = new MeasurePlayer(tempo, beats, subdivs, dbAccents);
+function BasicPlayer(measurePlayer) {
+  this.measurePlayer = measurePlayer;
   this.timer = null;
   this.playing = false;
-
-  this.init = function(tempo, beats, subdivs, dbAccents) {
-    this.measurePlayer.init(tempo, beats, subdivs, dbAccents);
-  }
 
   this.play = function(self) {
     self.measurePlayer.play(self.measurePlayer);
@@ -70,15 +65,15 @@ function BasicPlayer(tempo, beats, subdivs, dbAccents) {
   }
 
   this.togglePlay = function() {
-    var objsToUpdate = document.getElementsByClassName('update-object');
+    var objsToUpdate = $('.update-object');
     this.playing = !this.playing;
     if (this.playing === true) {
       this.play(this);
-      document.getElementsByName('play-stop')[0].innerHTML = 'pause';
+      $('#play-stop').html('pause');
     }
     else {
       this.stop(this);
-      document.getElementsByName('play-stop')[0].innerHTML = 'play_arrow';
+      $('#play-stop').html('play_arrow');
     }
     for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
       objsToUpdate[objIndex].disabled = this.playing;
