@@ -1,7 +1,10 @@
-// Depends on measurePlayer.js
+// Requires basicPlayer.js
+// Requires measurePlayer.js
+// Requires advancedPlayer.js
 
 let BASIC_PLAYER = null;
-let ACTIVE_MEASURE = null;
+let ADVANCED_PLAYER = null;
+let CURRENT_MEASURE = null;
 
 function init() {
   // Input callbacks
@@ -30,9 +33,13 @@ function init() {
   })
 
   // Get the initial values
-  ACTIVE_MEASURE = new MeasurePlayer();
+  CURRENT_MEASURE = new MeasurePlayer();
   updateMeasure();
-  BASIC_PLAYER = new BasicPlayer(ACTIVE_MEASURE);
+  BASIC_PLAYER = new BasicPlayer(CURRENT_MEASURE);
+  ADVANCED_PLAYER = new AdvancedPlayer();
+
+  // Add measure callback
+  $('#add-measure').on('click', addCurrentMeasure);
 }
 
 function updateMeasure(event) {
@@ -40,7 +47,11 @@ function updateMeasure(event) {
   var beats = $('#beats').val();
   var subdiv = $('#subdiv').val();
   var accents = $('#db-accent').prop('checked');
-  ACTIVE_MEASURE.init(tempo, beats, subdiv, accents);
+  CURRENT_MEASURE.init(tempo, beats, subdiv, accents);
+}
+
+function addCurrentMeasure(event) {
+  ADVANCED_PLAYER.addMeasure(CURRENT_MEASURE);
 }
 
 function printProps(obj) {

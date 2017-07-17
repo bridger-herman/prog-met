@@ -1,9 +1,20 @@
 // Requires measurePlayer.js
 
-function BasicPlayer(measurePlayer) {
-  this.measurePlayer = measurePlayer;
+function createMeasureLI(measure) {
+  return '<li class="disp-measure">' + measure + '</li>';
+}
+
+function AdvancedPlayer() {
   this.timer = null;
   this.playing = false;
+  this.measureList = [];
+
+  this.addMeasure = function(measureToAdd) {
+    this.measureList.push(measureToAdd);
+    let r = '';
+    let list = $('#measure-list');
+    list.append(createMeasureLI(measureToAdd));
+  }
 
   this.play = function(self) {
     self.measurePlayer.play(self.measurePlayer);

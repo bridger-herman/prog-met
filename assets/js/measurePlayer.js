@@ -1,7 +1,8 @@
-// Depends on toneGenerator.js
+// Requires toneGenerator.js
 
 function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
   this.init = function(tempo, beats, subdivs, dbAccents) {
+    this.tempo = tempo;
     this.beats = beats;
     this.subdivs = subdivs;
     this.dbAccents = dbAccents;
@@ -23,7 +24,6 @@ function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
     this.timers[timerIndex] = null;
   }
 
-  // TODO add a toggle feature
   this.play = function(self) {
     for (var timerIndex = 0; timerIndex < self.numSubdivs; timerIndex++) {
       if (timerIndex % self.subdivs === 0) {
@@ -48,5 +48,9 @@ function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
       clearTimeout(this.timers[timerIndex]);
       this.timers[timerIndex] = null;
     }
+  }
+
+  this.toString = function() {
+    return 'Measure(' + this.tempo + 'bpm, ' + this.beats + ', ' + this.subdivs + ')'
   }
 }
