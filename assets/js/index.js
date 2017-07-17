@@ -9,9 +9,9 @@ let CURRENT_MEASURE = null;
 function init() {
   // Input callbacks
   var objsToUpdate = $('.update-object');
-  for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
-    objsToUpdate[objIndex].onchange = updateMeasure;
-  }
+  objsToUpdate.each(function (objIndex) {
+    $(objsToUpdate[objIndex]).on('change', updateMeasure);
+  })
 
   // Input validation
   let inputs = $('input[type=number]');

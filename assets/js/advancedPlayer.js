@@ -1,7 +1,7 @@
 // Requires measurePlayer.js
 
 function createMeasureLI(measure) {
-  return '<li class="disp-measure">' + measure + '</li>';
+  return '<li class="measure">' + measure + '</li>';
 }
 
 function AdvancedPlayer() {
@@ -11,9 +11,7 @@ function AdvancedPlayer() {
 
   this.addMeasure = function(measureToAdd) {
     this.measureList.push(measureToAdd);
-    let r = '';
-    let list = $('#measure-list');
-    list.append(createMeasureLI(measureToAdd));
+    $('#measure-list').append(createMeasureLI(measureToAdd));
   }
 
   this.play = function(self) {
