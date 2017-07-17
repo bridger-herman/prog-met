@@ -8,21 +8,27 @@
   </head>
   <body>
     <h1>Programmable Metronome</h1>
+    <div class="measure-props">
+      <form>
+        <label for="tempo">Tempo</label>
+        <input required minlength="1" class="update-object" type="number" name="tempo" id="tempo" value="120" min="1" max="300">
+
+        <label for="beats">Beats per measure</label>
+        <input required minlength="1" class="update-object" type="number" name="beats" id="beats" value="4" min="1" max="20">
+
+        <label for="subdiv">Clicks per beat</label>
+        <input required minlength="1" class="update-object" type="number" name="subdiv" id="subdiv" value="1" min="1" max="10">
+
+        <label for="db-accent">Accent downbeats</label>
+        <input required minlength="1" class="update-object" type="checkbox" name="db-accent" id="db-accent" checked>
+        <!-- <input class="material-icons" type="submit" name="add-measure" value="add"> -->
+        <!-- <button class="material-icons" type="button" name="add-measure">add</button> -->
+      </form>
+    </div>
     <div class="basic">
       <h2>Basic Mode</h2>
       <button class="material-icons" type="button" name="play-stop" id="play-stop" onclick="BASIC_PLAYER.togglePlay()">play_arrow</button>
 
-      <label for="tempo">Tempo</label>
-      <input required minlength="1" class="update-object" type="number" name="tempo" id="tempo" value="120" min="1" max="300">
-
-      <label for="beats">Beats per measure</label>
-      <input required minlength="1" class="update-object" type="number" name="beats" id="beats" value="4" min="1" max="20">
-
-      <label for="subdiv">Clicks per beat</label>
-      <input required minlength="1" class="update-object" type="number" name="subdiv" id="subdiv" value="1" min="1" max="10">
-
-      <label for="db-accent">Accent downbeats</label>
-      <input required minlength="1" class="update-object" type="checkbox" name="db-accent" id="db-accent" checked>
     </div>
     <div class="advanced">
       <h2>Advanced Mode</h2>
