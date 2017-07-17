@@ -29,11 +29,11 @@ function AdvancedPlayer() {
     this.playing = !this.playing;
     if (this.playing === true) {
       this.play(this);
-      $('#play-stop').html('pause');
+      $('#advanced-play-stop').html('pause');
     }
     else {
       this.stop(this);
-      $('#play-stop').html('play_arrow');
+      $('#advanced-play-stop').html('play_arrow');
     }
     for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
       objsToUpdate[objIndex].disabled = this.playing;
