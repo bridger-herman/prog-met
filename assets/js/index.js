@@ -40,12 +40,15 @@ function init() {
   ADVANCED_PLAYER = new AdvancedPlayer();
 
   // Add measure callback
-  $('#add-measure').on('click', function() {ADVANCED_PLAYER.addMeasure(USER_MEASURE)});
+  $('#add-measure').on('click', function() {ADVANCED_PLAYER.addMeasure(USER_MEASURE);});
 
-  // Play button callbacks
-  $('#basic-play-pause').on('click', function() {BASIC_PLAYER.togglePlay()});
-  $('#advanced-play-pause').on('click', function() {ADVANCED_PLAYER.togglePlay()});
-  $('#advanced-stop').on('click', function() {ADVANCED_PLAYER.stop()});
+  // Media controls
+  $('#basic-play-pause').on('click', function() {BASIC_PLAYER.togglePlay();});
+
+  $('#advanced-play-pause').on('click', function() {ADVANCED_PLAYER.togglePlay();});
+  $('#advanced-stop').on('click', function() {ADVANCED_PLAYER.stop();});
+  $('#advanced-step-forward').on('click', function() {ADVANCED_PLAYER.nextMeasure();});
+  $('#advanced-step-back').on('click', function() {ADVANCED_PLAYER.previousMeasure();});
 }
 
 function updateUserMeasure(event) {
