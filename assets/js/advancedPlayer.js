@@ -15,29 +15,33 @@ function AdvancedPlayer() {
     let m = jQuery.extend(true, {}, measureToAdd);
     this.measureList.push(m);
     $('#measure-list').append(createMeasureLI(m));
+    if (this.measureList.length === 1) {
+      $('.measure').addClass('active');
+    }
   }
 
   this.play = function(self) {
+    this.playing = true;
     self.currentMeasurePlayer = self.measureList[self.currentIndex];
     self.currentMeasurePlayer.play(self.currentMeasurePlayer);
 
     $('.measure').removeClass('active');
     $('.measure:eq(' + self.currentIndex + ')').addClass('active');
+    $('#advanced-play-pause').html('pause');
 
-    $('#advanced-play-stop').html('pause');
     if (self.currentIndex + 1 < self.measureList.length) {
       self.timer = setTimeout(self.play, self.currentMeasurePlayer.totalTime, self);
       self.currentIndex++;
     }
     else {
-      self.timer = setTimeout(self.stop, self.currentMeasurePlayer.totalTime, self);
-      self.currentIndex = 0;
+      self.timer = setTimeout(self.pause, self.currentMeasurePlayer.totalTime, self);
     }
   }
 
-  this.stop = function(self) {
-    $('.measure').removeClass('active');
-    $('#advanced-play-stop').html('play_arrow');
+  this.pause = function(self) {
+    $('#advanced-play-pause').html('play_arrow');
+
+    self.currentIndex--;
     this.playing = false;
     if (self.currentMeasurePlayer !== null) {
       self.currentMeasurePlayer.stop(self.currentMeasurePlayer);
@@ -48,18 +52,24 @@ function AdvancedPlayer() {
   }
 
   this.togglePlay = function() {
-    // var objsToUpdate = $('.update-object');
     if (this.currentIndex < this.measureList.length) {
       this.playing = !this.playing;
       if (this.playing === true) {
         this.play(this);
       }
       else {
-        this.stop(this);
+        this.pause(this);
       }
     }
-    // for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
-    //   objsToUpdate[objIndex].disabled = this.playing;
-    // }
+  }
+
+  this.stop = function() {
+    this.pause(this);
+    this.currentIndex = 0;
+    this.currentMeasurePlayer = null;
+    this.timer = null;
+
+    $('.measure').removeClass('active');
+    let x = $($('.measure')[0]).addClass('active');
   }
 }

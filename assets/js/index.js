@@ -43,8 +43,9 @@ function init() {
   $('#add-measure').on('click', function() {ADVANCED_PLAYER.addMeasure(USER_MEASURE)});
 
   // Play button callbacks
-  $('#basic-play-stop').on('click', function() {BASIC_PLAYER.togglePlay()});
-  $('#advanced-play-stop').on('click', function() {ADVANCED_PLAYER.togglePlay()});
+  $('#basic-play-pause').on('click', function() {BASIC_PLAYER.togglePlay()});
+  $('#advanced-play-pause').on('click', function() {ADVANCED_PLAYER.togglePlay()});
+  $('#advanced-stop').on('click', function() {ADVANCED_PLAYER.stop()});
 }
 
 function updateUserMeasure(event) {

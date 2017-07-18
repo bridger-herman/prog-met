@@ -20,11 +20,11 @@ function BasicPlayer(measurePlayer) {
     this.playing = !this.playing;
     if (this.playing === true) {
       this.play(this);
-      $('#basic-play-stop').html('pause');
+      $('#basic-play-pause').html('pause');
     }
     else {
       this.stop(this);
-      $('#basic-play-stop').html('play_arrow');
+      $('#basic-play-pause').html('play_arrow');
     }
     for (var objIndex = 0; objIndex < objsToUpdate.length; objIndex++) {
       objsToUpdate[objIndex].disabled = this.playing;
