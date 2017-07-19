@@ -47,6 +47,16 @@ function init() {
   $('#advanced-stop').on('click', function() {ADVANCED_PLAYER.stop();});
   $('#advanced-step-forward').on('click', function() {ADVANCED_PLAYER.nextMeasure();});
   $('#advanced-step-back').on('click', function() {ADVANCED_PLAYER.previousMeasure();});
+
+  // Edit/delete controls
+  $('#delete-measure').on('click', deleteSelectedMeasures);
+}
+
+function deleteSelectedMeasures() {
+  let selectedMeasures = $('ul .measure input[type="checkbox"]:checked');
+  for (var i = 0; i < selectedMeasures.length; i++) {
+    ADVANCED_PLAYER.removeMeasure(selectedMeasures[i].name);
+  }
 }
 
 function updateUserMeasure(event) {

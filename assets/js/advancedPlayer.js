@@ -14,6 +14,10 @@ function AdvancedPlayer() {
   this.currentMeasurePlayer = null;
 
   this.updateMeasureDisplay = function() {
+    $('#measure-list').empty();
+    for (var i = 0; i < this.measureList.length; i++) {
+      $('#measure-list').append(createMeasureLI(this.measureList[i]));
+    }
     $('.measure').removeClass('active');
     $('.measure:eq(' + this.currentIndex + ')').addClass('active');
   }
@@ -33,10 +37,23 @@ function AdvancedPlayer() {
     let m = jQuery.extend(true, {}, measureToAdd);
     m.id = 'measure-' + Date.now();
     this.measureList.push(m);
-    $('#measure-list').append(createMeasureLI(m));
     if (this.measureList.length === 1) {
       $('.measure').addClass('active');
     }
+    this.updateMeasureDisplay();
+  }
+
+  this.removeMeasure = function(measureIDToRemove) {
+    let index = -1;
+    for (var i = 0; i < this.measureList.length; i++) {
+      if (this.measureList[i].id === measureIDToRemove) {
+        index = i;
+      }
+    }
+    if (index > -1) {
+      this.measureList.splice(index, 1);
+    }
+    this.updateMeasureDisplay();
   }
 
   this.play = function(self) {
@@ -103,7 +120,7 @@ function AdvancedPlayer() {
   }
 
   this.previousMeasure = function() {
-    if (this.currentIndex> 0) {
+    if (this.currentIndex > 0) {
       this.currentIndex--;
       this.updateMeasureDisplay();
     }
