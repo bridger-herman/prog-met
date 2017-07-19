@@ -7,13 +7,6 @@ let ADVANCED_PLAYER = null;
 let USER_MEASURE = null;
 
 function init() {
-  // Input callbacks
-  var objsToUpdate = $('.update-object');
-  objsToUpdate.each(function (objIndex) {
-    $(objsToUpdate[objIndex]).on('change', updateUserMeasure);
-  })
-
-
   // Input validation
   let inputs = $('input[type=number]');
   inputs.each(function (i) {
@@ -39,12 +32,17 @@ function init() {
   BASIC_PLAYER = new BasicPlayer(USER_MEASURE);
   ADVANCED_PLAYER = new AdvancedPlayer();
 
+  // Input callbacks
+  var objsToUpdate = $('.update-object');
+  objsToUpdate.each(function (objIndex) {
+    $(objsToUpdate[objIndex]).on('change', updateUserMeasure);
+  })
+
   // Add measure callback
   $('#add-measure').on('click', function() {ADVANCED_PLAYER.addMeasure(USER_MEASURE);});
 
   // Media controls
   $('#basic-play-pause').on('click', function() {BASIC_PLAYER.togglePlay();});
-
   $('#advanced-play-pause').on('click', function() {ADVANCED_PLAYER.togglePlay();});
   $('#advanced-stop').on('click', function() {ADVANCED_PLAYER.stop();});
   $('#advanced-step-forward').on('click', function() {ADVANCED_PLAYER.nextMeasure();});

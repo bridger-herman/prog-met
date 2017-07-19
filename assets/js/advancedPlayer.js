@@ -1,7 +1,9 @@
 // Requires measurePlayer.js
 
 function createMeasureLI(measure) {
-  return '<li class="measure">' + measure + '</li>';
+  return '<li class="measure">' +
+      '<input type="checkbox" name="' + measure.id + '">' +
+      '<label for="' + measure.id + '">' + measure + '</label></li>';
 }
 
 function AdvancedPlayer() {
@@ -29,6 +31,7 @@ function AdvancedPlayer() {
 
   this.addMeasure = function(measureToAdd) {
     let m = jQuery.extend(true, {}, measureToAdd);
+    m.id = 'measure-' + Date.now();
     this.measureList.push(m);
     $('#measure-list').append(createMeasureLI(m));
     if (this.measureList.length === 1) {
