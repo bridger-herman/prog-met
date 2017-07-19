@@ -20,6 +20,8 @@ function AdvancedPlayer() {
     }
     $('.measure').removeClass('active');
     $('.measure:eq(' + this.currentIndex + ')').addClass('active');
+    // $('.measure').attr('checked', false); // TODO not sure if this is desired
+    // $('.measure input[type="checkbox"]:eq(' + this.currentIndex + ')').attr('checked', true);
   }
 
   this.updateMediaControls = function() {
@@ -37,9 +39,6 @@ function AdvancedPlayer() {
     let m = jQuery.extend(true, {}, measureToAdd);
     m.id = 'measure-' + Date.now();
     this.measureList.push(m);
-    if (this.measureList.length === 1) {
-      $('.measure').addClass('active');
-    }
     this.updateMeasureDisplay();
   }
 
@@ -81,7 +80,6 @@ function AdvancedPlayer() {
     if (self.timer !== null) {
       clearTimeout(self.timer);
     }
-
     self.updateMediaControls();
   }
 
