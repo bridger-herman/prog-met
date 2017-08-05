@@ -1,0 +1,15 @@
+.measure.active {
+  color: green;
+}
+
+/* Default advanced mode to unseen */
+/*.advanced {
+  display: none;
+}*/
+
+.player {
+  display: none;
+}
+.player:target {
+  display: block;
+}

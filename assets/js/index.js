@@ -51,6 +51,11 @@ function init() {
   // Edit/delete controls
   $('#delete-measure').on('click', deleteSelectedMeasures);
   $('#edit-measure').on('click', editSelectedMeasures);
+
+  // Default to basic mode
+  if (window.location.hash !== '#basic-mode') {
+    window.location += '#basic-mode';
+  }
 }
 
 function deleteSelectedMeasures() {
