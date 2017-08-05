@@ -16,7 +16,7 @@ function BasicPlayer(measurePlayer) {
   }
 
   this.togglePlay = function() {
-    var objsToUpdate = $('.update-object');
+    var objsToUpdate = $('.user-measure');
     this.playing = !this.playing;
     if (this.playing === true) {
       this.play(this);

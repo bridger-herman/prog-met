@@ -33,7 +33,7 @@ function init() {
   ADVANCED_PLAYER = new AdvancedPlayer();
 
   // Input callbacks
-  var objsToUpdate = $('.update-object');
+  var objsToUpdate = $('.user-measure');
   objsToUpdate.each(function (objIndex) {
     $(objsToUpdate[objIndex]).on('change', updateUserMeasure);
   })

@@ -2,11 +2,6 @@
   color: green;
 }
 
-/* Default advanced mode to unseen */
-/*.advanced {
-  display: none;
-}*/
-
 .player {
   display: none;
 }
