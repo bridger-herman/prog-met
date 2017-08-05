@@ -50,12 +50,20 @@ function init() {
 
   // Edit/delete controls
   $('#delete-measure').on('click', deleteSelectedMeasures);
+  $('#edit-measure').on('click', editSelectedMeasures);
 }
 
 function deleteSelectedMeasures() {
   let selectedMeasures = $('ul .measure input[type="checkbox"]:checked');
   for (var i = 0; i < selectedMeasures.length; i++) {
     ADVANCED_PLAYER.removeMeasure(selectedMeasures[i].name);
+  }
+}
+
+function editSelectedMeasures() {
+  let selectedMeasures = $('ul .measure input[type="checkbox"]:checked');
+  for (var i = 0; i < selectedMeasures.length; i++) {
+    ADVANCED_PLAYER.editMeasure(selectedMeasures[i].name, USER_MEASURE);
   }
 }
 

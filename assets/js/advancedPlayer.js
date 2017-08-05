@@ -35,6 +35,16 @@ function AdvancedPlayer() {
     }
   }
 
+  this.findMeasureIndex = function(measureID) {
+    let index = -1;
+    for (var i = 0; i < this.measureList.length; i++) {
+      if (this.measureList[i].id === measureID) {
+        index = i;
+      }
+    }
+    return index;
+  }
+
   this.addMeasure = function(measureToAdd) {
     let m = jQuery.extend(true, {}, measureToAdd);
     m.id = 'measure-' + Date.now();
@@ -43,14 +53,19 @@ function AdvancedPlayer() {
   }
 
   this.removeMeasure = function(measureIDToRemove) {
-    let index = -1;
-    for (var i = 0; i < this.measureList.length; i++) {
-      if (this.measureList[i].id === measureIDToRemove) {
-        index = i;
-      }
-    }
+    let index = this.findMeasureIndex(measureIDToRemove);
     if (index > -1) {
       this.measureList.splice(index, 1);
+    }
+    this.updateMeasureDisplay();
+  }
+
+  this.editMeasure = function(measureIDToEdit, newMeasure) {
+    let index = this.findMeasureIndex(measureIDToEdit);
+    if (index > -1) {
+      let m = jQuery.extend(true, {}, newMeasure);
+      m.id = 'measure-' + Date.now();
+      this.measureList[index] = m;
     }
     this.updateMeasureDisplay();
   }
