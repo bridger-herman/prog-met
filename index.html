@@ -11,7 +11,7 @@
     <h1>Programmable Metronome</h1>
     <nav>
       <ul>
-        <li><a href="#basic-mode">Basic</a></li>
+        <li><a class="active" href="#basic-mode">Basic</a></li>
         <li><a href="#advanced-mode">Advanced</a></li>
       </ul>
     </nav>
@@ -30,10 +30,10 @@
         <input required minlength="1" class="user-measure" type="checkbox" name="db-accent" id="db-accent" checked>
       </form>
     </div>
-    <div class="basic player" id="basic-mode">
+    <div class="player" id="basic-mode">
       <button class="material-icons" type="button" name="basic-play-pause" id="basic-play-pause">play_arrow</button>
     </div>
-    <div class="advanced player" id="advanced-mode">
+    <div class="player" id="advanced-mode">
       <button class="material-icons step" type="button" name="advanced-step-back" id="advanced-step-back">skip_previous</button>
       <button class="material-icons" type="button" name="advanced-play-pause" id="advanced-play-pause">play_arrow</button>
       <button class="material-icons" type="button" name="advanced-stop" id="advanced-stop">stop</button>

@@ -53,9 +53,13 @@ function init() {
   $('#edit-measure').on('click', editSelectedMeasures);
 
   // Default to basic mode
-  if (window.location.hash !== '#basic-mode') {
+  if (window.location.hash === '') {
     window.location += '#basic-mode';
   }
+  $(window).on('hashchange', function() {
+    $('nav ul li a').removeClass('active');
+    $('nav ul li a[href="' + window.location.hash + '"]').addClass('active');
+  });
 }
 
 function deleteSelectedMeasures() {
