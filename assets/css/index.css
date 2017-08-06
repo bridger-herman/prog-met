@@ -22,9 +22,12 @@ nav ul li .active {
   display: flex;
   align-items: center;
   justify-content: left;
+  flex-wrap: wrap;
+}
+.player {
+  margin: 20px 10px;
 }
 .player .measure-controls {
-  margin: 20px;
   width: 50%;
   font-size: 30px;
 }
@@ -42,4 +45,12 @@ nav ul li .active {
 .player button {
   width: 10%;
   height: 60px;
+}
+
+.song-controls {
+  width: 90%;
+}
+.song-controls button {
+  height: 60px;
+  width: 5%;
 }
