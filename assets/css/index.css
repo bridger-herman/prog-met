@@ -2,13 +2,7 @@
   color: green;
 }
 
-.player {
-  display: none;
-}
-.player:target {
-  display: block;
-}
-
+/* Navigation */
 nav ul {
   padding: 0;
   list-style-type: none;
@@ -18,4 +12,34 @@ nav ul li {
 }
 nav ul li .active {
   color: orange;
+}
+
+/* Main controls */
+.player {
+  display: none;
+}
+.player:target {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+.player .measure-controls {
+  margin: 20px;
+  width: 50%;
+  font-size: 30px;
+}
+.player .measure-controls form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+.player .measure-controls form input {
+  font-size: inherit;
+  text-align: center;
+  margin: 20px 10px;
+  width: 25%;
+}
+.player button {
+  width: 10%;
+  height: 60px;
 }
