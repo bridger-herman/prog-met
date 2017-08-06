@@ -51,6 +51,6 @@ function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
   }
 
   this.toString = function() {
-    return 'Measure(' + this.tempo + 'bpm, ' + this.beats + ', ' + this.subdivs + ')'
+    return 'Measure(' + this.tempo + 'bpm, ' + this.beats + ', ' + this.subdivs + '): ' + this.id
   }
 }

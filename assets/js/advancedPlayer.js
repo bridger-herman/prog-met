@@ -47,6 +47,7 @@ function AdvancedPlayer() {
 
   this.addMeasure = function(measureToAdd) {
     let m = jQuery.extend(true, {}, measureToAdd);
+    console.log('adding measure ' + measureToAdd);
     m.id = 'measure-' + Date.now();
     this.measureList.push(m);
     this.updateMeasureDisplay();

@@ -26,18 +26,6 @@ function init() {
     })
   })
 
-  // Get the initial values
-  USER_MEASURE = new MeasurePlayer();
-  updateUserMeasure();
-  BASIC_PLAYER = new BasicPlayer(USER_MEASURE);
-  ADVANCED_PLAYER = new AdvancedPlayer();
-
-  // Input callbacks
-  var objsToUpdate = $('.user-measure');
-  objsToUpdate.each(function (objIndex) {
-    $(objsToUpdate[objIndex]).on('change', updateUserMeasure);
-  })
-
   // Add measure callback
   $('#add-measure').on('click', function() {ADVANCED_PLAYER.addMeasure(USER_MEASURE);});
 
@@ -52,14 +40,50 @@ function init() {
   $('#delete-measure').on('click', deleteSelectedMeasures);
   $('#edit-measure').on('click', editSelectedMeasures);
 
-  // Default to basic mode
-  if (window.location.hash === '') {
-    window.location += '#basic-mode';
-  }
   $(window).on('hashchange', function() {
     $('nav ul li a').removeClass('active');
     $('nav ul li a[href="' + window.location.hash + '"]').addClass('active');
+    insertMeasureControls(window.location.hash);
   });
+
+  // Default to basic mode
+  if (window.location.hash !== '#basic-mode') {
+    window.location.hash = '#basic-mode';
+  }
+
+  // Get the initial values
+  USER_MEASURE = new MeasurePlayer();
+  updateUserMeasure();
+  BASIC_PLAYER = new BasicPlayer(USER_MEASURE);
+  ADVANCED_PLAYER = new AdvancedPlayer();
+
+  // Insert the HTML for measure controls (in the right place)
+  insertMeasureControls(window.location.hash);
+}
+
+function insertMeasureControls(context) {
+  html = '<form>' +
+    '<label for="tempo">Tempo</label>' +
+    '<input required minlength="1" class="user-measure" type="number" name="tempo" id="tempo" value="120" min="1" max="300">' +
+
+    '<label for="beats">Beats per measure</label>' +
+    '<input required minlength="1" class="user-measure" type="number" name="beats" id="beats" value="4" min="1" max="20">' +
+
+    '<label for="subdiv">Clicks per beat</label>' +
+    '<input required minlength="1" class="user-measure" type="number" name="subdiv" id="subdiv" value="1" min="1" max="10">' +
+
+    '<label for="db-accent">Accent downbeats</label>' +
+    '<input required minlength="1" class="user-measure" type="checkbox" name="db-accent" id="db-accent" checked>' +
+  '</form>';
+  $('.measure-controls').empty();
+  $(context + ' .measure-controls').html(html);
+
+  // Update input callbacks
+  var measureInputs = $('.user-measure');
+  measureInputs.each(function (index) {
+    $(measureInputs[index]).on('change', updateUserMeasure);
+  })
+  updateUserMeasure();
 }
 
 function deleteSelectedMeasures() {
@@ -77,6 +101,7 @@ function editSelectedMeasures() {
 }
 
 function updateUserMeasure(event) {
+  console.log('updating measure!!');
   var tempo = $('#tempo').val();
   var beats = $('#beats').val();
   var subdiv = $('#subdiv').val();
