@@ -2,7 +2,7 @@
 
 function createMeasureLI(measure) {
   return '<li class="measure">' +
-      '<input type="checkbox" name="' + measure.id + '">' +
+      '<input type="checkbox" id="' + measure.id + '">' +
       '<label for="' + measure.id + '">' + measure + '</label></li>';
 }
 
