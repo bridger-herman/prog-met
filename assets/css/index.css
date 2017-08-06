@@ -27,6 +27,12 @@ nav ul li .active {
 .player {
   margin: 20px 10px;
 }
+.player button {
+  width: 10%;
+  height: 60px;
+}
+
+/* Measure Controls (tempo, etc.) */
 .player .measure-controls {
   width: 50%;
   font-size: 30px;
@@ -42,15 +48,12 @@ nav ul li .active {
   margin: 20px 10px;
   width: 25%;
 }
-.player button {
-  width: 10%;
-  height: 60px;
-}
 
-.song-controls {
+/* Song controls (add/edit/delete measures) */
+.player .song-controls {
   width: 90%;
 }
-.song-controls button {
+.player .song-controls button {
   height: 60px;
   width: 5%;
 }
