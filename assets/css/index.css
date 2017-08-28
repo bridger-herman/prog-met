@@ -27,10 +27,6 @@ nav ul li .active {
 .player {
   margin: 20px 10px;
 }
-.player button {
-  width: 10%;
-  height: 60px;
-}
 
 /* Measure Controls (tempo, etc.) */
 .player .measure-controls {
@@ -56,4 +52,13 @@ nav ul li .active {
 .player .song-controls button {
   height: 60px;
   width: 5%;
+}
+
+/* Make slider and buttons nice-looking */
+.player button {
+  width: 10%;
+  height: 60px;
+}
+.player .stacked {
+  width: 50%;
 }
