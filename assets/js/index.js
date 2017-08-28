@@ -40,16 +40,18 @@ function init() {
   $('#delete-measure').on('click', deleteSelectedMeasures);
   $('#edit-measure').on('click', editSelectedMeasures);
 
+  // Default mode
+  let defaultMode = 'advanced'
+  if (window.location.hash !== '#' + defaultMode + '-mode') {
+    window.location.hash = '#' + defaultMode + '-mode';
+  }
+  $('nav ul li a[href="' + window.location.hash + '"]').addClass('active');
+
   $(window).on('hashchange', function() {
     $('nav ul li a').removeClass('active');
     $('nav ul li a[href="' + window.location.hash + '"]').addClass('active');
     insertMeasureControls(window.location.hash);
   });
-
-  // Default to basic mode
-  if (window.location.hash !== '#basic-mode') {
-    window.location.hash = '#basic-mode';
-  }
 
   // Get the initial values
   USER_MEASURE = new MeasurePlayer();
