@@ -1,3 +1,7 @@
+button {
+  height: 60px;
+}
+
 .measure.active {
   color: green;
 }
@@ -47,10 +51,14 @@ nav ul li .active {
 
 /* Song controls (add/edit/delete measures) */
 .song-controls {
+  display: flex;
+  flex-direction: row;
   width: 90%;
 }
-.song-controls button {
-  height: 60px;
+.song-controls .measure-buttons {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
   width: 5%;
 }
 
@@ -69,7 +77,6 @@ nav ul li .active {
 }
 .playback-controls button {
   width: 15%;
-  height: 60px;
   margin: 20px 0px;
 }
 .playback-controls input {
