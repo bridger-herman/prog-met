@@ -29,16 +29,16 @@ nav ul li .active {
 }
 
 /* Measure Controls (tempo, etc.) */
-.player .measure-controls {
+.measure-controls {
   width: 50%;
   font-size: 30px;
 }
-.player .measure-controls form {
+.measure-controls form {
   display: flex;
   flex-direction: column;
   align-items: left;
 }
-.player .measure-controls form input {
+.measure-controls form input {
   font-size: inherit;
   text-align: center;
   margin: 20px 10px;
@@ -46,19 +46,32 @@ nav ul li .active {
 }
 
 /* Song controls (add/edit/delete measures) */
-.player .song-controls {
+.song-controls {
   width: 90%;
 }
-.player .song-controls button {
+.song-controls button {
   height: 60px;
   width: 5%;
 }
 
-/* Make slider and buttons nice-looking */
-.player button {
-  width: 10%;
-  height: 60px;
-}
-.player .stacked {
+/* Playback controls (play/pause/stop/skip, speed) */
+.playback-controls {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.playback-controls div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.playback-controls button {
+  width: 15%;
+  height: 60px;
+  margin: 20px 0px;
+}
+.playback-controls input {
+  width: 60%;
 }
