@@ -89,14 +89,14 @@ function insertMeasureControls(context) {
 function deleteSelectedMeasures() {
   let selectedMeasures = $('ul .measure input[type="checkbox"]:checked');
   for (var i = 0; i < selectedMeasures.length; i++) {
-    ADVANCED_PLAYER.removeMeasure(selectedMeasures[i].name);
+    ADVANCED_PLAYER.removeMeasure(selectedMeasures[i].id);
   }
 }
 
 function editSelectedMeasures() {
   let selectedMeasures = $('ul .measure input[type="checkbox"]:checked');
   for (var i = 0; i < selectedMeasures.length; i++) {
-    ADVANCED_PLAYER.editMeasure(selectedMeasures[i].name, USER_MEASURE);
+    ADVANCED_PLAYER.editMeasure(selectedMeasures[i].id, USER_MEASURE);
   }
 }
 
