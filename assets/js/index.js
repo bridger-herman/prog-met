@@ -61,8 +61,11 @@ function init() {
   BASIC_PLAYER = new BasicPlayer(USER_MEASURE);
   ADVANCED_PLAYER = new AdvancedPlayer();
 
-  $('#basic-speed').on('change', function() {BASIC_SPEED = $('#basic-speed').val()})
-  $('#advanced-speed').on('change', function() {ADVANCED_SPEED = $('#advanced-speed').val()})
+  updateSpeeds();
+  // $(basic).on('change', function() {BASIC_SPEED = $(basic).val()})
+  // $(advanced).on('change', function() {ADVANCED_SPEED = $(advanced).val()})
+  $('#basic-speed').on('change', updateSpeeds);
+  $('#advanced-speed').on('change', updateSpeeds);
 
   // Insert the HTML for measure controls (in the right place)
   insertMeasureControls(window.location.hash);
@@ -122,6 +125,15 @@ function updateUserMeasure(event) {
   var subdiv = $('#subdiv').val();
   var accents = $('#db-accent').prop('checked');
   USER_MEASURE.init(tempo, beats, subdiv, accents);
+}
+
+function updateSpeeds() {
+  let basic = '#basic-speed';
+  let advanced = '#advanced-speed';
+  BASIC_SPEED = $(basic).val();
+  ADVANCED_SPEED = $(advanced).val();
+  $(basic + '-num').html(BASIC_SPEED);
+  $(advanced + '-num').html(ADVANCED_SPEED);
 }
 
 function printProps(obj) {
