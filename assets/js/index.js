@@ -66,16 +66,16 @@ function init() {
 function insertMeasureControls(context) {
   html = '<form>' +
     '<label for="tempo">Tempo</label>' +
-    '<input required minlength="1" class="user-measure" type="number" name="tempo" id="tempo" value="120" min="1" max="300">' +
+    '<input required minlength="1" class="user-measure" type="number" id="tempo" value="120" min="1" max="300">' +
 
     '<label for="beats">Beats per measure</label>' +
-    '<input required minlength="1" class="user-measure" type="number" name="beats" id="beats" value="4" min="1" max="20">' +
+    '<input required minlength="1" class="user-measure" type="number" id="beats" value="4" min="1" max="20">' +
 
     '<label for="subdiv">Clicks per beat</label>' +
-    '<input required minlength="1" class="user-measure" type="number" name="subdiv" id="subdiv" value="1" min="1" max="10">' +
+    '<input required minlength="1" class="user-measure" type="number" id="subdiv" value="1" min="1" max="10">' +
 
     '<label for="db-accent">Accent downbeats</label>' +
-    '<input required minlength="1" class="user-measure" type="checkbox" name="db-accent" id="db-accent" checked>' +
+    '<input required minlength="1" class="user-measure" type="checkbox" id="db-accent" checked>' +
   '</form>';
   $('.measure-controls').empty();
   $(context + ' .measure-controls').html(html);
