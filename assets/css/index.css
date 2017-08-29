@@ -48,6 +48,9 @@ nav ul li .active {
   margin: 20px 10px;
   width: 25%;
 }
+.measure-controls form input[type='checkbox'] {
+  transform: scale(3);
+}
 
 /* Song controls (add/edit/delete measures) */
 .song-controls {
