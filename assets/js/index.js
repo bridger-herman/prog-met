@@ -5,6 +5,8 @@
 let BASIC_PLAYER = null;
 let ADVANCED_PLAYER = null;
 let USER_MEASURE = null;
+let BASIC_SPEED = null;
+let ADVANCED_SPEED = null;
 
 function init() {
   // Input validation
@@ -41,7 +43,7 @@ function init() {
   $('#edit-measure').on('click', editSelectedMeasures);
 
   // Default mode
-  let defaultMode = 'advanced'
+  let defaultMode = 'basic'
   if (window.location.hash !== '#' + defaultMode + '-mode') {
     window.location.hash = '#' + defaultMode + '-mode';
   }
@@ -58,6 +60,9 @@ function init() {
   updateUserMeasure();
   BASIC_PLAYER = new BasicPlayer(USER_MEASURE);
   ADVANCED_PLAYER = new AdvancedPlayer();
+
+  $('#basic-speed').on('change', function() {BASIC_SPEED = $('#basic-speed').val()})
+  $('#advanced-speed').on('change', function() {ADVANCED_SPEED = $('#advanced-speed').val()})
 
   // Insert the HTML for measure controls (in the right place)
   insertMeasureControls(window.location.hash);
@@ -112,7 +117,6 @@ function editSelectedMeasures() {
 }
 
 function updateUserMeasure(event) {
-  console.log('updating measure!!');
   var tempo = $('#tempo').val();
   var beats = $('#beats').val();
   var subdiv = $('#subdiv').val();
