@@ -1,9 +1,14 @@
 // Requires measurePlayer.js
+var MEASURE = 0;
 
 function createMeasureLI(measure) {
   return '<li class="measure">' +
       '<input type="checkbox" id="' + measure.id + '">' +
       '<label for="' + measure.id + '">' + measure + '</label></li>';
+}
+
+function getUniqueMeasureID() {
+  return 'measure-' + MEASURE++;
 }
 
 function AdvancedPlayer() {
@@ -47,8 +52,7 @@ function AdvancedPlayer() {
 
   this.addMeasure = function(measureToAdd) {
     let m = jQuery.extend(true, {}, measureToAdd);
-    console.log('adding measure ' + measureToAdd);
-    m.id = 'measure-' + Date.now();
+    m.id = getUniqueMeasureID();
     this.measureList.push(m);
     this.updateMeasureDisplay();
   }
@@ -65,7 +69,7 @@ function AdvancedPlayer() {
     let index = this.findMeasureIndex(measureIDToEdit);
     if (index > -1) {
       let m = jQuery.extend(true, {}, newMeasure);
-      m.id = 'measure-' + Date.now();
+      m.id = getUniqueMeasureID();
       this.measureList[index] = m;
     }
     this.updateMeasureDisplay();
