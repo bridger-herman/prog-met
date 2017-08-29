@@ -39,17 +39,14 @@ nav ul li .active {
 }
 .measure-controls form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: left;
 }
 .measure-controls form input {
   font-size: inherit;
   text-align: center;
   margin: 20px 10px;
-  width: 25%;
-}
-.measure-controls form input[type='checkbox'] {
-  transform: scale(3);
+  width: 75%;
 }
 
 /* Song controls (add/edit/delete measures) */

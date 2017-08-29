@@ -65,17 +65,26 @@ function init() {
 
 function insertMeasureControls(context) {
   html = '<form>' +
-    '<label for="tempo">Tempo</label>' +
-    '<input required minlength="1" class="user-measure" type="number" id="tempo" value="120" min="1" max="300">' +
-
-    '<label for="beats">Beats per measure</label>' +
-    '<input required minlength="1" class="user-measure" type="number" id="beats" value="4" min="1" max="20">' +
-
-    '<label for="subdiv">Clicks per beat</label>' +
-    '<input required minlength="1" class="user-measure" type="number" id="subdiv" value="1" min="1" max="10">' +
-
-    '<label for="db-accent">Accent downbeats</label>' +
-    '<input required minlength="1" class="user-measure" type="checkbox" id="db-accent" checked>' +
+    '<div>' +
+      '<div>' +
+        '<label for="tempo">Tempo</label>' +
+        '<input required minlength="1" class="user-measure" type="number" id="tempo" value="120" min="1" max="300">' +
+      '</div>' +
+      '<div>' +
+        '<label for="beats">Beats per measure</label>' +
+        '<input required minlength="1" class="user-measure" type="number" id="beats" value="4" min="1" max="20">' +
+      '</div>' +
+    '</div>' +
+    '<div>' +
+      '<div>' +
+        '<label for="subdiv">Clicks per beat</label>' +
+        '<input required minlength="1" class="user-measure" type="number" id="subdiv" value="1" min="1" max="10">' +
+      '</div>' +
+      '<div>' +
+        '<label for="db-accent">Accent downbeats</label>' +
+        '<input required minlength="1" class="user-measure" type="checkbox" id="db-accent" checked>' +
+      '</div>' +
+    '</div>' +
   '</form>';
   $('.measure-controls').empty();
   $(context + ' .measure-controls').html(html);
