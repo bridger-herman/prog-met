@@ -7,7 +7,6 @@ function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
     this.subdivs = subdivs;
     this.dbAccents = dbAccents;
     this.numSubdivs = beats*subdivs;
-
     this.timePerBeat = 60000/tempo;
     this.totalTime = this.timePerBeat*beats;
     this.timePerSubdiv = this.totalTime/this.numSubdivs;
@@ -25,6 +24,7 @@ function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
   }
 
   this.play = function(self) {
+    self.updateTempo();
     for (var timerIndex = 0; timerIndex < self.numSubdivs; timerIndex++) {
       if (timerIndex % self.subdivs === 0) {
         if (timerIndex === 0 && this.dbAccents === true) {
@@ -48,6 +48,12 @@ function MeasurePlayer(tempo, beats, subdivs, dbAccents) {
       clearTimeout(this.timers[timerIndex]);
       this.timers[timerIndex] = null;
     }
+  }
+
+  this.updateTempo = function() {
+    this.timePerBeat = 60000/(this.tempo*(SPEED/100));
+    this.totalTime = this.timePerBeat*this.beats;
+    this.timePerSubdiv = this.totalTime/this.numSubdivs;
   }
 
   this.toString = function() {
