@@ -69,11 +69,14 @@ nav ul li .active {
   flex-direction: column;
   align-items: center;
 }
+.playback-controls .speed-control {
+  flex-direction: column;
+}
 .playback-controls div {
   width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 .playback-controls button {
   width: 15%;

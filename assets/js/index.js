@@ -5,8 +5,7 @@
 let BASIC_PLAYER = null;
 let ADVANCED_PLAYER = null;
 let USER_MEASURE = null;
-let BASIC_SPEED = null;
-let ADVANCED_SPEED = null;
+let SPEED = null;
 
 function init() {
   // Input validation
@@ -53,6 +52,7 @@ function init() {
     $('nav ul li a').removeClass('active');
     $('nav ul li a[href="' + window.location.hash + '"]').addClass('active');
     insertMeasureControls(window.location.hash);
+    insertSpeedControl(window.location.hash);
   });
 
   // Get the initial values
@@ -61,11 +61,13 @@ function init() {
   BASIC_PLAYER = new BasicPlayer(USER_MEASURE);
   ADVANCED_PLAYER = new AdvancedPlayer();
 
-  updateSpeeds();
   // $(basic).on('change', function() {BASIC_SPEED = $(basic).val()})
   // $(advanced).on('change', function() {ADVANCED_SPEED = $(advanced).val()})
-  $('#basic-speed').on('change', updateSpeeds);
-  $('#advanced-speed').on('change', updateSpeeds);
+  // $('#basic-speed').on('change', updateSpeeds);
+  // $('#advanced-speed').on('change', updateSpeeds);
+  insertSpeedControl(window.location.hash);
+  updateSpeed();
+  $('.speed-control').on('change', updateSpeed);
 
   // Insert the HTML for measure controls (in the right place)
   insertMeasureControls(window.location.hash);
@@ -105,6 +107,19 @@ function insertMeasureControls(context) {
   updateUserMeasure();
 }
 
+function insertSpeedControl(context) {
+  html =
+      '<input type="range" value="100" id="speed-control" list="percentages">' +
+      '<label for="speed-control" id="speed-control-num">Playback Speed:&nbsp100%</label>'
+  $('.speed-control').empty();
+  $(context + ' .speed-control').html(html);
+}
+
+function updateSpeed() {
+  SPEED = $('#speed-control').val();
+  $('#speed-control-num').html('Playback Speed:&nbsp' + SPEED + '%');
+}
+
 function deleteSelectedMeasures() {
   let selectedMeasures = $('ul .measure input[type="checkbox"]:checked');
   for (var i = 0; i < selectedMeasures.length; i++) {
@@ -125,15 +140,6 @@ function updateUserMeasure(event) {
   var subdiv = $('#subdiv').val();
   var accents = $('#db-accent').prop('checked');
   USER_MEASURE.init(tempo, beats, subdiv, accents);
-}
-
-function updateSpeeds() {
-  let basic = '#basic-speed';
-  let advanced = '#advanced-speed';
-  BASIC_SPEED = $(basic).val();
-  ADVANCED_SPEED = $(advanced).val();
-  $(basic + '-num').html(BASIC_SPEED);
-  $(advanced + '-num').html(ADVANCED_SPEED);
 }
 
 function printProps(obj) {
